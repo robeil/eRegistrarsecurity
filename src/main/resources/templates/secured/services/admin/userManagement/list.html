@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>List page</title>
+</head>
+<body class="bg-success p-2 text-dark bg-opacity-10">
+<header th:replace="fragments/header :: header"></header>
+<main>
+    <div class="container-fluid">
+        <h1 class="modal-title">List of Student that they are available.</h1>
+
+        <form method="get" class="d-flex container " th:action="@{'/eRegistrar/student/list/search'}" role="search"
+              th:object="${students}">
+            <input class="form-control w-25 me-2" th:value="search" name="searchString" placeholder="Search">
+            <button class="btn btn-outline-success" type="submit" href="/eRegistrar/student/list">Search</button>
+        </form>
+    </div>
+<h1></h1>
+    <div class="mb-4 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="p-2 bg-info bg-opacity-10 border border-info border-start-0 rounded-end">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Student#</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Middle Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">GPA</th>
+                    <th scope="col">Enrollment Date</th>
+                    <th scope="col">International</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr th:each="student, counter : ${students}">
+                    <th th:text="${counter.count} +${'.'}"></th>
+                    <th th:text="${student.studentNumber}"></th>
+                    <th th:text="${student.firstName}"></th>
+                    <th th:text="${student.middleName}"></th>
+                    <th th:text="${student.lastName}"></th>
+                    <th th:text="${student.cgpa}"></th>
+                    <th th:text="${student.enrollmentDate}"></th>
+                    <th th:text="${student.isInternational}"></th>
+                    <td>
+                        <a class="btn btn-info"
+                           th:href="@{'/eRegistrar/student/edit/{studentId}'(studentId=${student.studentId})}">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"
+                           th:href="@{'/eRegistrar/student/delete/{studentId}'(studentId=${student.studentId})}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav>
+                <ul class="pagination">
+                    <li class="page-item">
+
+                        <th scope="row">Pages#</th>
+
+                        <td th:each="pageCount : ${#numbers.sequence(1,students.totalPages)}">
+                            <a th:if="${currentPageNo == pageCount - 1}"
+                               th:href="@{/eRegistrar/student/list(pageNo=${pageCount - 1})}"
+                               th:text="${pageCount}"/>
+
+                            <a th:if="${currentPageNo != pageCount - 1}"
+                               th:href="@{/eRegistrar/student/list(pageNo=${pageCount - 1})}"
+                               th:text="${pageCount}"/>
+
+                    </li>
+                </ul>
+
+            </nav>
+
+        </div>
+    </div>
+    <div>
+        <a href="/eRegistrar/student/new">
+            <button class="btn btn-success">Register new Student</button>
+        </a>
+    </div>
+</main>
+</body>
+<footer th:replace="fragments/footer :: footer"></footer>
+</html>

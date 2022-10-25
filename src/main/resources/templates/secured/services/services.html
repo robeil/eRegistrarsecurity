@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>The eRegistrar service page.</title>
+</head>
+<header th:replace="fragments/header :: header"></header>
+<body>
+<h3>eRegistrar<sup>&reg;</sup> Services</h3>
+<hr/>
+<div style="font-size: 1em">
+    <p>For now please take a look at this picture.</p>
+    <br/>
+    <div class="shadow-lg p-3 mb-5 bg-body rounded text-center">
+        <div sec:authorize="hasRole('ROLE_STUDENT')" class="col-md-4">
+            <div style="font-size: 1em;">
+                <div class="card border-primary mb-3" style="max-width: 20rem;">
+                    <a style="text-decoration: inherit;" href="/elibrary/secured/services/checkout">
+                        <div style="color: #1a1a1a;" class="card-header">As a <b>Student</b> You should be able to see
+                            this.
+                        </div>
+                        <div class="card mb-3">
+                            <img src="https://www.macroconnect.net/wp-content/uploads/2018/05/student-registration.jpg"
+                                 class="card-img-top" alt="...">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="font-size: 1em">
+            <p>For now please take a look at this picture.</p>
+            <br/>
+            <div sec:authorize="hasRole('ROLE_REGISTRAR')" class="col-md-4">
+                <div style="font-size: 1em;">
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <a style="text-decoration: inherit;" href="/elibrary/secured/services/checkout">
+                            <div style="color: #1a1a1a;" class="card-header">As a <b>eRegistrar</b> You should be able
+                                to see this.
+                            </div>
+                            <div class="card mb-3">
+                                <img src="https://www.blueridge.edu/wp-content/uploads/2020/01/ftr-Registrar-dsc_9674-1024x576.jpg"
+                                     class="card-img-top" alt="...">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="font-size: 1em">
+                <p>For now please take a look at this picture.</p>
+                <br/>
+                <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-md-4">
+                    <div style="font-size: 1em;">
+                        <div class="card border-primary mb-3" style="max-width: 20rem;">
+                            <a style="text-decoration: inherit;" href="/elibrary/secured/services/checkout">
+                                <div style="color: #1a1a1a;" class="card-header">As a <b>Admin</b> You should be able to
+                                    see this <b>all of them</b>.
+                                </div>
+                                <div class="card mb-3">
+                                    <img src="http://www.beterjudo.nl/wp-content/uploads/2016/12/admin.jpg"
+                                         class="card-img-top" alt="...">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer th:replace="fragments/footer :: footer"></footer>
+</html>
